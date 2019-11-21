@@ -1,0 +1,198 @@
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar4477_rf_tuned_on_vci_apr16_2019/  --weak_data_path ./data/litvar_4477_abs_tit_key_apr_15_2019_random_forest_tuned_on_vci.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5 --share_decoder
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar4477_logistic_reg_on_explanations_apr16_2019/  --weak_data_path ./data/litvar_4477_abs_tit_key_apr_15_2019_logistic_reg_on_explanations.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5 --share_decoder
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar4477_random_forest_cotrain_apr16_2019/  --weak_data_path ./data/litvar_4477_abs_tit_key_apr_15_2019_random_forest_cotrain_on_vci.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5 --share_decoder
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar4477_metal_on_explanations_may10_2019/  --weak_data_path ./data/litvar_4477_abs_tit_key_may_10_2019_metal_on_explanations.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5 --share_decoder
+
+# logistic regression w/ decision threshold set at 0.1
+CUDA_VISIBLE_DEVICES=1 python3.6 train.py --exp_path ./saved/weak_litvar4477_logistic_reg_on_explanations_threshold01_apr23_2019/  --weak_data_path ./data/litvar_4477_abs_tit_key_threshold01_apr_23_2019_logistic_reg_on_explanations.csv --weak_vocab --weak_loss_scale 0.1 --epochs 7
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/baseline/  --epochs 5
+
+# the above results were run on wrong dataset...LitVar had overlap with ClinGen...should not have overlap
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar3827_rf_cotrain_on_vci_may31_2019_run2/  --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_random_forest_cotrain_on_vci.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5 --share_decoder
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar3827_rf_tuned_on_vci_may31_2019_run2/  --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_random_forest_tuned_on_vci.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5 --share_decoder
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar3827_logistic_reg_on_explanations_may31_2019/  --weak_data_path ./data/litvar_3827_abs_tit_key_threshold01_may_31_2019_logistic_reg_on_explanations.csv --weak_vocab --weak_loss_scale 0.3 --epochs 6 --share_decoder
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar3827_metal_on_explanations_may31_2019/  --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_metal_on_explanations.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5 --share_decoder
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_acmg_litvar_ssl_label_prop_on_explanations_june9_2019/  --weak_data_path ./data/litvar_3827_abs_tit_key_july_5_2019_SSL_label_prop_on_explanations.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5 --share_decoder
+
+
+# Running on the two baselines
+
+# Multitask learning with explanations
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/multi_task_exp_train_on_vci_share_decoder_june9_2019_run2/ --epochs 5 --multi_task_data_path ./data/explanations_5panels_shuffled.csv --share_decoder
+
+# MTL + Unsupervised
+
+## baseline (weak sup baseline)
+CUDA_VISIBLE_DEVICES=2 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar3827_rf_tuned_on_vci_may31_2019_run3/  --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_random_forest_tuned_on_vci.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5
+
+## baseline (MTL baseline)
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/multi_task_exp_train_on_vci_no_share_decoder_june9_2019_run3/ --epochs 5 --multi_task_data_path ./data/explanations_5panels_shuffled.csv
+
+## trying to combine both
+
+### MTL + LitVar on DLC-Exp
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar4477_rf_tuned_on_vci_apr16_2019/  --weak_data_path ./data/litvar_4477_abs_tit_key_apr_15_2019_random_forest_tuned_on_vci.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5 --share_decoder
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar4477_logistic_reg_on_explanations_apr16_2019/  --weak_data_path ./data/litvar_4477_abs_tit_key_apr_15_2019_logistic_reg_on_explanations.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5 --share_decoder
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar4477_random_forest_cotrain_apr16_2019/  --weak_data_path ./data/litvar_4477_abs_tit_key_apr_15_2019_random_forest_cotrain_on_vci.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5 --share_decoder
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar4477_metal_on_explanations_may10_2019/  --weak_data_path ./data/litvar_4477_abs_tit_key_may_10_2019_metal_on_explanations.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5 --share_decoder
+
+# logistic regression w/ decision threshold set at 0.1
+CUDA_VISIBLE_DEVICES=1 python3.6 train.py --exp_path ./saved/weak_litvar4477_logistic_reg_on_explanations_threshold01_apr23_2019/  --weak_data_path ./data/litvar_4477_abs_tit_key_threshold01_apr_23_2019_logistic_reg_on_explanations.csv --weak_vocab --weak_loss_scale 0.1 --epochs 7
+
+CUDA_VISIBLE_DEVICES=0 python3.6 -m pdb train.py --exp_path ./saved/baseline/  --epochs 5
+
+# the above results were run on wrong dataset...LitVar had overlap with ClinGen...should not have overlap
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar3827_rf_cotrain_on_vci_may31_2019_run2/  --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_random_forest_cotrain_on_vci.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5 --share_decoder
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar3827_rf_tuned_on_vci_may31_2019_run2/  --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_random_forest_tuned_on_vci.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5 --share_decoder
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar3827_logistic_reg_on_explanations_may31_2019/  --weak_data_path ./data/litvar_3827_abs_tit_key_threshold01_may_31_2019_logistic_reg_on_explanations.csv --weak_vocab --weak_loss_scale 0.3 --epochs 6 --share_decoder
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar3827_metal_on_explanations_may31_2019/  --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_metal_on_explanations.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5 --share_decoder
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_acmg_litvar_ssl_label_prop_on_explanations_june9_2019/  --weak_data_path ./data/litvar_3827_abs_tit_key_july_5_2019_SSL_label_prop_on_explanations.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5 --share_decoder
+
+
+# Running on the two baselines
+
+# Multitask learning with explanations
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/multi_task_exp_train_on_vci_share_decoder_june9_2019_run2/ --epochs 5 --multi_task_data_path ./data/explanations_5panels_shuffled.csv --share_decoder
+
+# MTL + Unsupervised
+
+## baseline (weak sup baseline)
+CUDA_VISIBLE_DEVICES=2 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar3827_rf_tuned_on_vci_may31_2019_run3/  --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_random_forest_tuned_on_vci.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5
+
+## baseline (MTL baseline)
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/multi_task_exp_train_on_vci_no_share_decoder_june9_2019_run3/ --epochs 5 --multi_task_data_path ./data/explanations_5panels_shuffled.csv
+
+
+## trying to combine both
+
+### MTL + LitVar on DLC-Exp
+CUDA_VISIBLE_DEVICES=2 python3.6 -m pdb train.py --exp_path ./saved/multi_task_exp_train_on_vci_no_share_decoder_rf_tuned_on_vci_june14_2019_run3/ --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_random_forest_tuned_on_vci.csv --weak_vocab --weak_loss_scale 0.2 --epochs 5 --mtl_loss_scale 0.3 --multi_task_data_path ./data/explanations_5panels_shuffled.csv
+
+### MTL + LitVar on DLC-Exp, MTL first
+CUDA_VISIBLE_DEVICES=2 python3.6 -m pdb train.py --exp_path ./saved/multi_task_exp_train_on_vci_no_share_decoder_rf_tuned_on_vci_june14_2019_run3/ --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_random_forest_tuned_on_vci.csv --weak_vocab --weak_loss_scale 0.3 --weak_epochs 6 --epochs 5  --mtl_loss_scale 0.2 --multi_task_data_path ./data/explanations_5panels_shuffled.csv --mtl_first
+(for MTL part)
+ROC-AUC: [0.73673399 0.66386022 0.51282051 0.56188593 0.73029379]
+[07/14/2019 10:16:13 PM] INFO: external test EM: 0.48703170028818443
+[07/14/2019 10:16:13 PM] INFO: external by-label accuracy: [0.84149855 0.8097983  0.89048994 0.8760807  0.7348703 ]
+[07/14/2019 10:16:13 PM] INFO: external average accuracy: 0.8305475115776062
+(if this still doesn't work, I'll add dropout)
+
+CUDA_VISIBLE_DEVICES=2 python3.6 -m pdb train.py --exp_path ./saved/multi_task_exp_weak_litvar3827_logistic_reg_on_explanations_june14_2019/  --weak_data_path ./data/litvar_3827_abs_tit_key_threshold01_may_31_2019_logistic_reg_on_explanations.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5 --mtl_loss_scale 0.3 --multi_task_data_path ./data/explanations_5panels_shuffled.csv --mtl_first
+(for MTL part) (Q: how come it's not the same as above!?) (really can't figure it out...) (but the end joint result is NORMAL, so it's fine)
+[07/14/2019 10:14:10 PM] INFO: external test EM: 0.5043227665706052
+[07/14/2019 10:14:10 PM] INFO: external by-label accuracy: [0.86743516 0.8299712  0.88760805 0.8847262  0.7463977 ]
+[07/14/2019 10:14:10 PM] INFO: external average accuracy: 0.8432276844978333
+
+CUDA_VISIBLE_DEVICES=2 python3.6 -m pdb train.py --exp_path ./saved/multi_task_exp_weak_litvar3827_rf_cotrain_on_vci_june14_2019_run2/  --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_random_forest_cotrain_on_vci.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5 --mtl_loss_scale 0.3 --multi_task_data_path ./data/explanations_5panels_shuffled.csv --mtl_first
+
+CUDA_VISIBLE_DEVICES=2 python3.6 -m pdb train.py --exp_path ./saved/multi_task_exp_weak_litvar3827_metal_on_explanations_june14_2019/  --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_metal_on_explanations.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5 --mtl_loss_scale 0.3 --multi_task_data_path ./data/explanations_5panels_shuffled.csv --mtl_first
+
+### MTL + ACMG + LitVar on all strategies (to just list them all...no need to worry)
+
+
+### MTL + ACMG + LitVar on DLC-Exp
+CUDA_VISIBLE_DEVICES=2 python3.6 -m pdb train.py --exp_path ./saved/multi_task_exp_train_on_vci_no_share_decoder_weak_acmg_litvar_rf_tuned_on_vci_june14_2019/  --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_random_forest_tuned_on_vci.csv --weak_vocab --weak_loss_scale 0.1 --epochs 5 --acmg_weak_data_path ./data/acmg_10562_abs_tit_key_june_9_2019_random_forest_tuned_on_vci.csv --mtl_loss_scale 0.3 --multi_task_data_path ./data/explanations_5panels_shuffled.csv
+
+### Large LSTM MTL + LitVar on DLC-Exp
+CUDA_VISIBLE_DEVICES=2 python3.6 -m pdb train.py --exp_path ./saved/multi_task_exp_train_on_vci_no_share_decoder_dim512_emb300_rf_tuned_on_vci_june14_2019/ --mtl_loss_scale 0.2 --multi_task_data_path ./data/explanations_5panels_shuffled.csv --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_random_forest_tuned_on_vci.csv --weak_vocab --weak_loss_scale 0.3 --epochs 10 --emb_dim 300 --hid_dim 512
+
+### Large LSTM MTL + ACMG + LitVar on DLC-Exp
+CUDA_VISIBLE_DEVICES=2 python3.6 -m pdb train.py --exp_path ./saved/multi_task_exp_train_on_vci_no_share_decoder_dim512_emb300_rf_tuned_on_vci_june14_2019/ --mtl_loss_scale 0.2 --multi_task_data_path ./data/explanations_5panels_shuffled.csv --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_random_forest_tuned_on_vci.csv --weak_vocab --weak_loss_scale 0.3 --epochs 10 --emb_dim 300 --hid_dim 512
+
+# Trying out Label smoothing (this does not work...)
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar3827_rf_tuned_on_vci_may31_2019_run2/  --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_random_forest_tuned_on_vci.csv --weak_vocab --weak_label_smoothing_esp 0.05 --epochs 5 --weak_loss_scale 0.3
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar3827_rf_tuned_on_vci_may31_2019_run2/  --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_random_forest_tuned_on_vci.csv --weak_vocab --epochs 5 --weak_loss_scale 0.3
+
+
+# Concatenation learning with explanations
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/concat_exp_train_on_vci_june9_2019_run2/ --epochs 5 --dataset_prefix vci_1543_abs_tit_key_june_9_2019_concat_exp_
+
+# Run noisy label training on ACMG + LitVar
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_acmg_litvar_rf_tuned_on_vci_june9_2019/  --weak_data_path ./data/litvar_4477_abs_tit_key_apr_15_2019_random_forest_tuned_on_vci.csv --weak_vocab --weak_loss_scale 0.1 --epochs 5 --acmg_weak_data_path ./data/acmg_10562_abs_tit_key_june_9_2019_random_forest_tuned_on_vci.csv --share_decoder
+
+CUDA_VISIBLE_DEVICES=2 python3.6 -m pdb train.py --exp_path ./saved/weak_acmg_litvar_rf_tuned_on_vci_june9_2019/  --weak_data_path ./data/litvar_4477_abs_tit_key_apr_15_2019_random_forest_tuned_on_vci.csv --weak_vocab --weak_loss_scale 0.1 --epochs 5 --acmg_weak_data_path ./data/acmg_10562_abs_tit_key_june_9_2019_random_forest_tuned_on_vci.csv
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_acmg_litvar_logistic_reg_on_explanations_june9_2019/  --weak_data_path ./data/litvar_4477_abs_tit_key_apr_15_2019_logistic_reg_on_explanations.csv --weak_vocab --weak_loss_scale 0.1 --epochs 5 --acmg_weak_data_path ./data/acmg_10562_abs_tit_key_june_9_2019_logistic_reg_on_explanations.csv --share_decoder
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_acmg_litvar_random_forest_cotrain_june9_2019/  --weak_data_path ./data/litvar_4477_abs_tit_key_apr_15_2019_random_forest_cotrain_on_vci.csv --weak_vocab --weak_loss_scale 0.1 --epochs 5 --acmg_weak_data_path ./data/acmg_10562_abs_tit_key_june_9_2019_random_forest_cotrain_on_vci.csv --share_decoder
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_acmg_litvar_metal_on_explanations_june9_2019/  --weak_data_path ./data/litvar_4477_abs_tit_key_may_10_2019_metal_on_explanations.csv --weak_vocab --weak_loss_scale 0.1 --epochs 5 --acmg_weak_data_path ./data/acmg_10562_abs_tit_key_june_9_2019_metal_on_explanations.csv --share_decoder
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_acmg_litvar_ssl_label_prop_on_explanations_june9_2019/  --weak_data_path ./data/litvar_3827_abs_tit_key_july_5_2019_SSL_label_prop_on_explanations.csv --weak_vocab --weak_loss_scale 0.1 --epochs 5 --acmg_weak_data_path ./data/acmg_10562_abs_tit_key_july5_2019_SSL_label_prop_on_explanations.csv --share_decoder
+m pdb train.py --exp_path ./saved/multi_task_exp_train_on_vci_no_share_decoder_rf_tuned_on_vci_june14_2019_run3/ --mtl_loss_scale 0.2 --multi_task_data_path ./data/explanations_5panels_shuffled.csv --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_random_forest_tuned_on_vci.csv --weak_vocab --weak_loss_scale 0.2 --epochs 5
+
+### LMTL + LitVar on DLC-Exp, MTL first
+
+### MTL + LitVar on other strategies (to just list them all...no need to worry)
+
+### MTL + ACMG + LitVar on DLC-Exp
+CUDA_VISIBLE_DEVICES=2 python3.6 -m pdb train.py --exp_path ./saved/multi_task_exp_train_on_vci_no_share_decoder_weak_acmg_litvar_rf_tuned_on_vci_june14_2019/  --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_random_forest_tuned_on_vci.csv --weak_vocab --weak_loss_scale 0.1 --epochs 5 --acmg_weak_data_path ./data/acmg_10562_abs_tit_key_june_9_2019_random_forest_tuned_on_vci.csv --mtl_loss_scale 0.3 --multi_task_data_path ./data/explanations_5panels_shuffled.csv
+
+### Large LSTM MTL + LitVar on DLC-Exp
+CUDA_VISIBLE_DEVICES=2 python3.6 -m pdb train.py --exp_path ./saved/multi_task_exp_train_on_vci_no_share_decoder_dim512_emb300_rf_tuned_on_vci_june14_2019/ --mtl_loss_scale 0.2 --multi_task_data_path ./data/explanations_5panels_shuffled.csv --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_random_forest_tuned_on_vci.csv --weak_vocab --weak_loss_scale 0.3 --epochs 10 --emb_dim 300 --hid_dim 512
+
+### Large LSTM MTL + ACMG + LitVar on DLC-Exp
+CUDA_VISIBLE_DEVICES=2 python3.6 -m pdb train.py --exp_path ./saved/multi_task_exp_train_on_vci_no_share_decoder_dim512_emb300_rf_tuned_on_vci_june14_2019/ --mtl_loss_scale 0.2 --multi_task_data_path ./data/explanations_5panels_shuffled.csv --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_random_forest_tuned_on_vci.csv --weak_vocab --weak_loss_scale 0.3 --epochs 10 --emb_dim 300 --hid_dim 512
+
+# Trying out Label smoothing (this does not work...)
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar3827_rf_tuned_on_vci_may31_2019_run2/  --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_random_forest_tuned_on_vci.csv --weak_vocab --weak_label_smoothing_esp 0.05 --epochs 5 --weak_loss_scale 0.3
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar3827_rf_tuned_on_vci_may31_2019_run2/  --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_random_forest_tuned_on_vci.csv --weak_vocab --epochs 5 --weak_loss_scale 0.3
+
+
+# Concatenation learning with explanations
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/concat_exp_train_on_vci_june9_2019_run2/ --epochs 5 --dataset_prefix vci_1543_abs_tit_key_june_9_2019_concat_exp_
+
+# Run noisy label training on ACMG + LitVar
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_acmg_litvar_rf_tuned_on_vci_june9_2019/  --weak_data_path ./data/litvar_4477_abs_tit_key_apr_15_2019_random_forest_tuned_on_vci.csv --weak_vocab --weak_loss_scale 0.1 --epochs 5 --acmg_weak_data_path ./data/acmg_10562_abs_tit_key_june_9_2019_random_forest_tuned_on_vci.csv --share_decoder
+
+CUDA_VISIBLE_DEVICES=2 python3.6 -m pdb train.py --exp_path ./saved/weak_acmg_litvar_rf_tuned_on_vci_june9_2019/  --weak_data_path ./data/litvar_4477_abs_tit_key_apr_15_2019_random_forest_tuned_on_vci.csv --weak_vocab --weak_loss_scale 0.1 --epochs 5 --acmg_weak_data_path ./data/acmg_10562_abs_tit_key_june_9_2019_random_forest_tuned_on_vci.csv
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_acmg_litvar_logistic_reg_on_explanations_june9_2019/  --weak_data_path ./data/litvar_4477_abs_tit_key_apr_15_2019_logistic_reg_on_explanations.csv --weak_vocab --weak_loss_scale 0.1 --epochs 5 --acmg_weak_data_path ./data/acmg_10562_abs_tit_key_june_9_2019_logistic_reg_on_explanations.csv --share_decoder
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_acmg_litvar_random_forest_cotrain_june9_2019/  --weak_data_path ./data/litvar_4477_abs_tit_key_apr_15_2019_random_forest_cotrain_on_vci.csv --weak_vocab --weak_loss_scale 0.1 --epochs 5 --acmg_weak_data_path ./data/acmg_10562_abs_tit_key_june_9_2019_random_forest_cotrain_on_vci.csv --share_decoder
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_acmg_litvar_metal_on_explanations_june9_2019/  --weak_data_path ./data/litvar_4477_abs_tit_key_may_10_2019_metal_on_explanations.csv --weak_vocab --weak_loss_scale 0.1 --epochs 5 --acmg_weak_data_path ./data/acmg_10562_abs_tit_key_june_9_2019_metal_on_explanations.csv --share_decoder
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_acmg_litvar_ssl_label_prop_on_explanations_june9_2019/  --weak_data_path ./data/litvar_3827_abs_tit_key_july_5_2019_SSL_label_prop_on_explanations.csv --weak_vocab --weak_loss_scale 0.1 --epochs 5 --acmg_weak_data_path ./data/acmg_10562_abs_tit_key_july5_2019_SSL_label_prop_on_explanations.csv --share_decoder
+
+# Aug 5 (show a set of pre-selected experiments for Table 2)
+
+(Baseline)
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/baseline/  --epochs 5
+
+(MTL)
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/multi_task_exp_train_on_vci_no_share_decoder_aug5_2019_run3/ --epochs 5 --multi_task_data_path ./data/explanations_5panels_shuffled.csv
+
+(Unlabeled)
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar3827_rf_cotrain_on_vci_aug5/  --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_random_forest_cotrain_on_vci.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5
+
+(Unlabeled + MTL)
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/multi_task_exp_weak_litvar3827_rf_cotrain_on_vci_aug5/  --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_random_forest_cotrain_on_vci.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5 --mtl_loss_scale 0.3 --multi_task_data_path ./data/explanations_5panels_shuffled.csv --mtl_first
+
+(LitGen)
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar3827_rf_tuned_on_vci_aug5_2019/  --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_random_forest_tuned_on_vci.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5
+
+# Aug 5 (add dropout tuning!!) )(does not change anything...hmmm...bizarre)
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/baseline/  --epochs 5 --dropout 0.2
+
+CUDA_VISIBLE_DEVICES=1 python3.6 -m pdb train.py --exp_path ./saved/weak_litvar3827_rf_tuned_on_vci_aug5_2019/  --weak_data_path ./data/litvar_3827_abs_tit_key_may_31_2019_random_forest_tuned_on_vci.csv --weak_vocab --weak_loss_scale 0.3 --epochs 5 --dropout 0.2
