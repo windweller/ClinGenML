@@ -1,0 +1,7 @@
+.idea/
+.ipynb_checkpoints
+.vector_cache
+__pycache__/
+.DS_Store
+*.json
+notes/
