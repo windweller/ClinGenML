@@ -119,3 +119,7 @@ You can find it in this file: `explanation_L1_predict_panels_v3.csv`.
 ## Contact Info
 
 You can reach out to the first aruthor anie@stanford.edu for inquiry on the dataset or model!
+
+## FQA
+
+Warning, you need to use `torchtext==0.2.3` in order to run successfully. 
